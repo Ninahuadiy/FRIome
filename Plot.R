@@ -7,6 +7,9 @@ summary(pca3)
 # plots PCA on an individuals factor map
 plot(pca3)
 
+# IMPORTANT! Here we use the prcomp function from the STAT package
+# The following code is modeled after the tutorial found online (documented on wiki)
+
 # log transformation
 log.king <- log(kingdom1[,2:4]) 
 
