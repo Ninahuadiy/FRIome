@@ -12,6 +12,9 @@ plot(pca3)
 
 # log transformation
 log.king <- log(kingdom1[,2:4]) 
+#b/c of infinite values, i removed the last column and row 66
+log.king <- log(kingdom1[,2:3])
+log.king <- log.kingdom[-66,]
 
 #apply PCA and set center and scale. = TRUE to standardize the variables
 pca.king <- prcomp(log.king, center = TRUE, scale. = TRUE)
@@ -58,3 +61,16 @@ pcakingData
 # views the PC1 and PC2 values of the pcakingData data frame
 pcakingData$PC1
 pcakingData$PC2
+
+# attempting to produce an MDS graph to compare PCA and MDS
+# results are identical, but coordinates are different (probably due to different scale)
+kingDist <- dist(log.king)
+# k = number of dimensions 
+kingFit <- cmdscale(kingDist, eig = TRUE, k = 2)
+# view results
+kingFit
+# plot
+x <- kingFit$points[,1]
+y <- kingFit$points[,2]
+plot(x, y, xlab = "Coordinate 1", ylab = "Coordinate 2", main = "Metric MDS", type = "n")
+text(x, y, labels = row.names(log.king), cex = .7)
