@@ -20,7 +20,7 @@ classDist <- dist(log.class)
 classFit <- cmdscale(classDist, eig = TRUE, k = 2)
 # view results
 classFit
-# plot
+# creates plot
 x <- classFit$points[,1]
 y <- classFit$points[,2]
 plot(x, y, xlab = "Coordinate 1", ylab = "Coordinate 2", main = "Metric MDS", type = "n")
