@@ -1,4 +1,4 @@
-# performs pca using the FactoMineR package
+# performs pca using the FactoMineR package, RMR to load package first
 pca3 <- PCA(kingdom1, scale.unit = TRUE, ncp = 5, ind.sup = NULL, quanti.sup = NULL, quali.sup = 1, row.w = NULL, col.w = NULL, graph = TRUE, axes = c(1,2))
 
 # displays the eigenvalues, variane, % of variance, and cummulative % of variance
@@ -14,7 +14,7 @@ plot(pca3)
 log.king <- log(kingdom1[,2:4]) 
 #b/c of infinite values, i removed the last column and row 66
 log.king <- log(kingdom1[,2:3])
-log.king <- log.kingdom[-66,]
+log.king <- log.king[-66,]
 
 #apply PCA and set center and scale. = TRUE to standardize the variables
 pca.king <- prcomp(log.king, center = TRUE, scale. = TRUE)
