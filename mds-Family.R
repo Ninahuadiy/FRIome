@@ -21,4 +21,4 @@ familyFit
 x <- familyFit$points[,1]
 y <- familyFit$points[,2]
 plot(x, y, xlab = "Coordinate 1", ylab = "Coordinate 2", main = "Metric MDS", type = "n")
-text(x, y, labels = row.names(log.family), cex = .7)
+text(x, y, labels = row.names(familyData), cex = .7)
