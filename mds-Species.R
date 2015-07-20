@@ -21,4 +21,4 @@ speciesFit
 x <- speciesFit$points[,1]
 y <- speciesFit$points[,2]
 plot(x, y, xlab = "Coordinate 1", ylab = "Coordinate 2", main = "Metric MDS", type = "n")
-text(x, y, labels = row.names(species), cex = .7)
+text(x, y, labels = row.names(speciesData), cex = .7)
