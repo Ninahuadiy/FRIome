@@ -12,6 +12,7 @@ log.phylum <- phylumData
 
 # Does PCR on rows 2-27; unsure of what "~." means in R, assuming a
 # placeholder, na.action = na.omit removes the NA values from PCA 
+# Link: https://stat.ethz.ch/pipermail/r-help/2008-January/150896.html
 pca.phy <- prcomp(~., data = log.phylum, center = TRUE, scale = TRUE, na.action = na.omit)
 
 # print results
