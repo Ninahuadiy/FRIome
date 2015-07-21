@@ -1,28 +1,4 @@
-# Dr. Riedel's code to subset
-clust1 <- subset(pcakingData, PC1 > 0)
-clust1 <- subset(pcakingData, PC1 > 0 & PC1 < 0.01)
-clust1
-
-# I tried reversing it by using the unscaled parameters at the top of the graph
-clust1 <- subset(pcakingData, PC1 > 50)
-
-# problem occurs because i am trying to subset rows on more than one value
-# code didn't work...gives the same results as before
-sub.king <- pcakingData[pcakingData$PC1 %in% c(-0.003, 0.007), ]
-sub.king
-
-# Attempt to subset with multiple values by displaying plot with all values
-# doesn't do anything helpful
-x = pcakingData$PC1
-y = pcakingData$PC2
-plot (x,y)
-plot (x,y, type = 'p')
-text(x, y, sep=", ", cex = 0.8)
-
-# Following the syntax outlined by help(subset)
-sub.king <- subset(pcakingData$PC1, select = -0.1:0.1)
-
-# Cluster Analysis and k-means method!!!
+# K-means Cluster method!!!
 
 # Determine the number of clusters
 wss <- (nrow(pcakingData)-1)*sum(apply(pcakingData, 2, var))
@@ -50,6 +26,19 @@ row.names(kingdom1[kmKing$cluster==clust[2],])
 # Row names of the third cluster
 row.names(kingdom1[kmKing$cluster==clust[3],])
 
+# combining id column, cluster information, and pcakingData (PC values) to one data frame
+# rename kmKing$cluster and test to something more logical
+test <- kingdom1$id
+test <- test[-66]
+
+# Consider renaming pcakingData1 back to pcakingData
+pcakingData1 <- cbind(pcakingData,kmKing$cluster,test)
+cluster1King<- subset(pcakingData1, kmKing$cluster == 1)
+cluster1King
+
+# (example) pulling a certain subset of cluster1King using set parameters
+cluster1King <- subset(pcakingData, kmKing$cluster == 1)
+cluster1King
 
 
 
