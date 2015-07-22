@@ -31,10 +31,16 @@ row.names(kingdom1[kmKing$cluster==clust[3],])
 test <- kingdom1$id
 test <- test[-66]
 
+# rename kmKing$cluster to kclusterGroup
+kclusterGroup <- kmKing$cluster
+
+#rename test to id 
+
+id <- test 
+
 # Consider renaming pcakingData1 back to pcakingData
-pcakingData1 <- cbind(pcakingData,kmKing$cluster,test)
-cluster1King<- subset(pcakingData1, kmKing$cluster == 1)
-cluster1King
+pcakingData1 <- cbind(pcakingData,kclusterGroup,id)
+pcakingData <- pcakingData1
 
 # (example) pulling a certain subset of cluster1King using set parameters
 cluster1King <- subset(pcakingData, kmKing$cluster == 1)
