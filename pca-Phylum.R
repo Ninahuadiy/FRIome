@@ -1,31 +1,21 @@
-# log transformation
-log.phylum <- log(phylum1[,2:27]) 
+# NEW PCA USING PERCENTAGES
+# PCA using rowsumPhylum b/c it does not contain the id column
+pca.phy <- prcomp(rowsumPhylum, center = TRUE, scale. = TRUE)
 
-# convert log transformation to data frame
-phylumData <- as.data.frame(log.phylum)
-
-# replace all infinite values with NA 
-phylumData[phylumData == -Inf] <- NA
-
-# transfers the dataframe back to log transformation
-log.phylum <- phylumData
-
-# Does PCR on rows 2-27; unsure of what "~." means in R, assuming a
-# placeholder, na.action = na.omit removes the NA values from PCA 
-# Link: https://stat.ethz.ch/pipermail/r-help/2008-January/150896.html
-pca.phy <- prcomp(~., data = log.phylum, center = TRUE, scale = TRUE, na.action = na.omit)
-
-# print results
+# prints out the standard deviations and rotations of pca.phy
 print(pca.phy)
 
-# plot with line
+# returns a plot of the variances (y-axis) assocaited with the PC's (x-axis)
 plot(pca.phy, type = "l")
 
-# gives summary 
+# summary method descriptes the importance of the PC's using their standard deviation, proportion of variance, and cumulative propotion of variance
+# We see that the first 2 components combined account for about 39% of variation 
 summary(pca.phy)
 
-# pca using a biplot
+# generates biplot from the output of princomp or prcomp
+# Can also add parameters such as choices (specifies components to plot) and can be scaled by a lambda
 g.phy <- biplot(pca.phy)
+print(g.phy)
 
 # prints out the pca values of all the components
 pca.phy$x
@@ -35,3 +25,5 @@ pcaPhyData <- as.data.frame(pca.phy$x)
 
 # retrieves all PC values for PC4
 pcaPhyData$PC4
+
+
