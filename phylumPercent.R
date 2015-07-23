@@ -1,4 +1,5 @@
-# creates a new dataframe minus the id column
+# Finding the percentages of the reads to normalize the data before apply PCA
+# creates a new dataframe for phylum1 minus the id column
 phylum1.num <- phylum1[,-1]
 # find row sums 
 rowSums(phylum1.num)
@@ -10,7 +11,7 @@ rowsumPhylum
 cbind(phylum1[,1], rowsumPhylum)
 phylumPercent <- cbind(phylum1[,1], rowsumPhylum)
 
-# renaming the id column name
+# renaming the id column name following the structure: colnames(dataframe)[column #] <- "new name"
 colnames(phylumPercent)[1] <- "id"
 
 #linear model
