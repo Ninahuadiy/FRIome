@@ -1,0 +1,16 @@
+wss <- (nrow(classData)-1)*sum(apply(classData, 2, var))
+for (i in 2:15) wss[i] <- sum(kmeans(classDist, centers = i)$withinss)
+plot(1:15, wss, type = "b", xlab = "Number of Clusters", ylab = "Within groups sum of squares")
+
+kmClass <- kmeans(classDist, 4, nstart = 25, iter.max = 1000)
+library(RColorBrewer)
+library(scales)
+palette(alpha(brewer.pal(9, 'Set1'), 0.5))
+plot(classDist, col=kmClass$cluster, pch=16)
+sort(table(kmClass$clust))
+clust <- names(sort(table(kmClass$clust)))
+row.names(class1[kmClass$cluster==clust[1],])
+row.names(class1[kmClass$cluster==clust[2], ])
+row.names(class1[kmClass$cluster==clust[3], ])
+row.names(class1[kmClass$cluster==clust[4], ])
+
