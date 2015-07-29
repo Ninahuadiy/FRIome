@@ -22,6 +22,17 @@ pca.order$x
 
 # turns it into a data frame, so that we don't have to type out pca.phy$x
 pcaOrderData <- as.data.frame(pca.order$x)
-
+# combines id column and the PC columns
+pcaOrderData <- cbind(order1[1], pcaOrderData)
 # retrieves all PC values for PC4
 pcaOrderData$PC4
+
+# pca without vectors and labels
+plot(pcaOrderData$PC1, pcaOrderData$PC2)
+
+# PCA graph without vectors and labels
+plot(pcaOrderData$PC1, pcaOrderData$PC2)
+pcaOrderData1 <- pcaOrderData[,-1]
+rownames(pcaOrderData1) <- pcaOrderData[,1]
+text(pcaOrderData$PC1, pcaOrderData$PC2, labels = row.names(pcaOrderData1))
+
