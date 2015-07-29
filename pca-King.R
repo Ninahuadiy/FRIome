@@ -1,13 +1,4 @@
-# performs pca using the FactoMineR package, RMR to load package first
-pca3 <- PCA(kingdom1, scale.unit = TRUE, ncp = 5, ind.sup = NULL, quanti.sup = NULL, quali.sup = 1, row.w = NULL, col.w = NULL, graph = TRUE, axes = c(1,2))
-
-# displays the eigenvalues, variane, % of variance, and cummulative % of variance
-summary(pca3)
-
-# plots PCA on an individuals factor map
-plot(pca3)
-
-# IMPORTANT! Here we use the prcomp function from the STAT package
+# Here we use the prcomp function from the STAT package
 # The following code is modeled after the tutorial found online (documented on wiki)
 
 # log transformation
@@ -56,7 +47,10 @@ pca.king$x[30,]
 # converts pca.king$x into a data frame called pcakingData in order to avoid 
 # typing out the full name
 pcakingData <- as.data.frame(pca.king$x)
-pcakingData
+# remove row 66 from kingdom1
+kingdom1 <- kingdom1[-66,]
+# combines id column and the PC columns
+id.pcakingData <- cbind(kingdom1[1], pcakingData)
 
 # views the PC1 and PC2 values of the pcakingData data frame
 pcakingData$PC1
@@ -74,3 +68,10 @@ x <- kingFit$points[,1]
 y <- kingFit$points[,2]
 plot(x, y, xlab = "Coordinate 1", ylab = "Coordinate 2", main = "Metric MDS", type = "n")
 text(x, y, labels = row.names(log.king), cex = .7)
+
+# pca without labels and vectors
+plot(pcakingData$PC1, pcakingData$PC2)
+pcakingData1 <- id.pcakingData[,-1]
+rownames(pcakingData1) <- id.pcakingData[,1]
+text(pcakingData$PC1, pcakingData$PC2, labels = row.names(pcakingData1))
+
