@@ -22,8 +22,20 @@ pca.phy$x
 
 # turns it into a data frame, so that we don't have to type out pca.phy$x
 pcaPhyData <- as.data.frame(pca.phy$x)
+# combines id column and the PC columns
+id.pcaPhyData <- cbind(phylum1[1], pcaPhyData)
 
 # retrieves all PC values for PC4
 pcaPhyData$PC4
+
+# PCA graph without vectors and labels
+plot(pcaPhyData$PC1, pcaPhyData$PC2)
+pcaPhyData1 <- id.pcaPhyData[,-1]
+rownames(pcaPhyData1) <- id.pcaPhyData[,1]
+text(pcaPhyData$PC1, pcaPhyData$PC2, labels = row.names(pcaPhyData1))
+
+
+
+
 
 
