@@ -22,6 +22,21 @@ pca.family$x
 
 # turns it into a data frame, so that we don't have to type out pca.phy$x
 pcaFamilyData <- as.data.frame(pca.family$x)
+# combines id column and the PC columns
+pcaFamilyData <- cbind(family1[1], pcaFamilyData)
 
 # retrieves all PC values for PC4
 pcaFamilyData$PC4
+
+# new PCA graph without labels and vectors 
+plot(pcaFamilyData$PC1, pcaFamilyData$PC2)
+pcaFamilyData1 <- pcaFamilyData[,-1]
+rownames(pcaFamilyData1) <- pcaFamilyData[,1]
+text(pcaFamilyData$PC1, pcaFamilyData$PC2, labels = row.names(pcaFamilyData1))
+
+
+
+
+
+
+

@@ -22,6 +22,13 @@ pca.genus$x
 
 # turns it into a data frame, so that we don't have to type out pca.phy$x
 pcaGenusData <- as.data.frame(pca.genus$x)
-
+# combines id and PC columns
+pcaGenusData <- cbind(genus1[1], pcaGenusData)
 # retrieves all PC values for PC4
 pcaGenusData$PC4
+
+# PCA graph without vectors and labels
+plot(pcaGenusData$PC1, pcaGenusData$PC2)
+pcaGenusData1 <- pcaGenusData[,-1]
+rownames(pcaGenusData1) <- pcaGenusData[,1]
+text(pcaGenusData$PC1, pcaGenusData$PC2, labels = row.names(pcaGenusData1))

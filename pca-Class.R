@@ -22,6 +22,15 @@ pca.class$x
 
 # turns it into a data frame, so that we don't have to type out pca.phy$x
 pcaClassData <- as.data.frame(pca.class$x)
+# combines id column and the PC columns
+pcaClassData <- cbind(class1[1], pcaClassData)
 
 # retrieves all PC values for PC4
 pcaClassData$PC4
+
+# PCA graph without vectors and labels
+plot(pcaClassData$PC1, pcaClassData$PC2)
+pcaClassData1 <- pcaClassData[,-1]
+rownames(pcaClassData1) <- pcaClassData[,1]
+text(pcaClassData$PC1, pcaClassData$PC2, labels = row.names(pcaClassData1))
+
