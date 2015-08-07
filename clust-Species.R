@@ -14,15 +14,16 @@ plot(pcaSpeciesData1, col=kmSpecies$cluster, pch=16)
 sort(table(kmSpecies$clust))
 clust <- names(sort(table(kmSpecies$clust)))
 
-# row names of first cluster (R named as cluster 3)
+# row names of first cluster
 row.names(pcaSpeciesData1[kmSpecies$cluster==clust[1],])
 
-# row names of second cluster (R named as cluster 1)
+# row names of second cluster
 row.names(pcaSpeciesData1[kmSpecies$cluster==clust[2],])
 
-# row names of second cluster (R named as cluster 2)
+# row names of third cluster
 row.names(pcaSpeciesData1[kmSpecies$cluster==clust[3],])
 
+# PC values of each cluster 
 sclusterGroup <- kmSpecies$cluster
 sclusterData <- cbind(pcaSpeciesData1,sclusterGroup)
 cluster1Species <- subset(sclusterData, sclusterGroup == 1)
