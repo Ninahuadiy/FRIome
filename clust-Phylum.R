@@ -15,9 +15,9 @@ sort(table(kmPhy$clust))
 clust <- names(sort(table(kmPhy$clust)))
 
 # row names of first cluster
-row.names(phylum1[kmPhy$cluster==clust[1],])
+row.names(pcaPhyData1[kmPhy$cluster==clust[1],])
 
 # row names of second cluster
-row.names(phylum1[kmPhy$cluster==clust[2],])
+row.names(pcaPhyData1[kmPhy$cluster==clust[2],])
 
 
