@@ -30,9 +30,6 @@ pcaPhyData$PC4
 
 # PCA graph without vectors and labels
 plot(pcaPhyData$PC1, pcaPhyData$PC2)
-pcaPhyData1 <- id.pcaPhyData[,-1]
-rownames(pcaPhyData1) <- id.pcaPhyData[,1]
-text(pcaPhyData$PC1, pcaPhyData$PC2, labels = row.names(pcaPhyData1))
 
 
 
