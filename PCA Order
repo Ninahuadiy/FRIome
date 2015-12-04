@@ -1,0 +1,62 @@
+# NEW PCA USING PERCENTAGES
+# PCA using rowsumOrder b/c it does not contain the id column
+pca.order <- prcomp(rowsumOrder, center = TRUE, scale. = TRUE)
+
+# prints out the standard deviations and rotations of pca.order
+print(pca.order)
+
+# returns a plot of the variances (y-axis) assocaited with the PC's (x-axis)
+plot(pca.order, type = "l")
+
+# summary method descriptes the importance of the PC's using their standard deviation, proportion of variance, and cumulative propotion of variance
+# We see that the first 2 components combined account for about 32% of variation 
+summary(pca.order)
+
+# generates biplot from the output of princomp or prcomp
+# Can also add parameters such as choices (specifies components to plot) and can be scaled by a lambda
+g.order <- biplot(pca.order)
+print(g.order)
+
+# prints out the pca values of all the components
+scoresOrder <- pca.order$x
+
+# prints out loadings 
+loadingsOrder <- pca.order$rotation
+
+# eigenvalues of principal components
+sdOrder <- pca.order$sdev
+
+# rownames of the loadings are the column names of the data
+rownames(loadingsOrder) <- colnames(rowsumOrder)
+# turns it into a data frame, so that we don't have to type out pca.order$x
+pcaOrderData <- as.data.frame(pca.order$x)
+# combines id column and the PC columns
+pcaOrderData <- cbind(order1[1], pcaOrderData)
+# retrieves all PC values for PC4
+pcaOrderData$PC4
+
+# pca without vectors and labels
+plot(pcaOrderData$PC1, pcaOrderData$PC2)
+
+# PCA graph without vectors and labels
+plot(pcaOrderData$PC1, pcaOrderData$PC2)
+pcaOrderData1 <- pcaOrderData[,-1]
+rownames(pcaOrderData1) <- pcaOrderData[,1]
+text(pcaOrderData$PC1, pcaOrderData$PC2, labels = row.names(pcaOrderData1))
+
+# determine number of principal components to keep
+varOrder <- sdOrder^2
+varOrder.percent <- varOrder/sum(varOrder) * 100
+dev.new()
+barplot(varOrder.percent, xlab = "PC", ylab = "Percent Variance", names.arg = 1:length(varOrder.percent), las = 1, ylim = c(0,max(varOrder.percent)), col = "gray")
+abline(h=1/ncol(rowsumOrder)*100, col = "red") # draws the line that shows how much each PC contributes if they do equally
+# combine the sum of the first 5 contributing PCs
+sum(varOrder.percent[1:2])
+
+#important loadings
+impLoadings <- sqrt(1/ncol(rowsumOrder))
+impLoadings
+
+# more biplots
+dev.new(height = 7, width = 7)
+biplot(scoresOrder[,1:2], loadingsOrder[,1:2], cex=0.7)
