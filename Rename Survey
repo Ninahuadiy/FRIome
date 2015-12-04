@@ -1,0 +1,434 @@
+# filter through survey responses to get range of answers 
+
+# load survey
+library(xlsx)
+surveyf15 <- read.xlsx("/Users/Nina/FRIome/FRIome/Fall-15-Survey.xlsx", 1)
+repSurvey15 <- surveyf15
+
+# get indices of questions not fixable
+grep("^Q8$", colnames(repSurvey15)) # index: 10
+grep("^Q24$", colnames(repSurvey15)) # index: 26
+grep("^Q15$", colnames(repSurvey15)) # index: 17
+grep("^Q77$", colnames(repSurvey15)) # index: 79
+
+# remove the questions 
+repSurvey15 <- repSurvey15[,c(-10, -26, -17, -79)]
+
+# get indices of Q16-20 at new indices and remove
+grep("^Q16$", colnames(repSurvey15)) # index:16-20
+repSurvey15 <- repSurvey15[,-(16:20)] # remove
+grep("^Q35$", colnames(repSurvey15)) # index: 29
+grep("^Q36$", colnames(repSurvey15)) # index: 30
+repSurvey15 <- repSurvey15[,c(-29, -30)]
+
+# view answers of question and counts of the answers for Q1; age
+table(surveyf15$Q1)
+# replace old answers with scaled answers for Q1
+repSurvey15$Q1 <- recode(surveyf15$Q1, "c('17') = '0'; c('18','19') = '1'; c('20','21') = '2'; c('26','27','37') = '3' ")
+
+# Q2 gender
+table(surveyf15$Q2)
+repSurvey15$Q2 <- recode(surveyf15$Q2, "c('Female') = '1'; c('Male') = '0'")
+
+# Q3 menstrual cycle
+table(surveyf15$Q3)
+repSurvey15$Q3 <- recode(surveyf15$Q3, "c('0','1','3','4','6','7','9','10') = '0'; c('11','12','13','15','16','17','18','19','20')  = '1'; c('21','23','24','25','27','28','30') = '2'; c('34','37','75') = '3'")
+
+# Q4 sleep
+table(surveyf15$Q4)
+repSurvey15$Q4 <- recode(surveyf15$Q4, "c('1','2','4','5') = '0'; c('6','7','7.5','8') = '1'; c('9','10','12') = '2'")
+
+#Q5 prescription medication
+table(surveyf15$Q5)
+repSurvey15$Q5 <- recode(surveyf15$Q5, "c('birth control (seasonique)', 'birth control (Trinessa)', 'Birth control', 'Adderall','Enbrel','Gildess FE 1/20','Lo Loestrin Fe','Synthroid', 'Tri-Sprintec', 'Citlopram ') = 'Yes'; c('no ','no','None','none') = 'No'")
+table(repSurvey15$Q5)
+repSurvey15$Q5 <- recode(repSurvey15$Q5, "c('No') = '0'; c('Yes') = '1'")
+
+#Q6 oral antibiotics
+table(surveyf15$Q6)
+repSurvey15$Q6 <- recode(surveyf15$Q6, "c('Not within the last year') = '0'; c('Within the last 6 months') = '2'; c('Within the last month') = '3'; c('Within the last week') = '4'; c('Within the last year') = '1'")
+
+# Q7 topical antibiotics
+table(surveyf15$Q7)
+repSurvey15$Q7 <- recode(surveyf15$Q7, "c('Not with in the last year') = '0'; c('Within the last 6 months') = '2'; c('Within the last month') = '3'; c('Within the last week') = '4'; c('Within the last year') = '1'")
+
+# Q9 Eye color
+table(surveyf15$Q9)
+repSurvey15$Q9 <- recode(surveyf15$Q9, "c('Green/blue/gold mix') = 'Mixed' ")
+repSurvey15$Q9 <- recode(repSurvey15$Q9, "c('Blue') = '0'; c('Green') = '1';c('Hazel') = '2';c('Brown') = '3'; c('Black') = '4'; c('Mixed') = '5'")
+
+# Q10 Right/Left handed
+table(surveyf15$Q10)
+repSurvey15$Q10 <- recode(surveyf15$Q10, "c('Left') = '0'; c('Right') = '1'; c('Ambidextrous') = '2'")
+
+# Q11 Race/Ethnicity
+table(surveyf15$Q11) 
+repSurvey15$Q11 <- recode(surveyf15$Q11, "c('Caucasian') = '0'; c('African American') = '1'; c('Hispanic') = '2'; c('Asian / Pacific Islander','Pakistani' ) = '3'; c('American Indian') = '4'; c('Caucasian, American Indian') = '5'; c('Caucasian, Asian / Pacific Islander') = '6'; c('Caucasian, Hispanic') = '7'; c('Hispanic, Middle Eastern ') = '8'")
+
+# Q12 feelings before donation
+table(surveyf15$Q12)
+repSurvey15$Q12 <- recode(surveyf15$Q12, "c('2') = '0'; c('3') = '1'; c('4') = '2'; c('5') = '3'; c('1') = '4' ")
+
+# Q13 symptoms week before donation 
+table(surveyf15$Q13)
+repSurvey15$Q13 <- recode(surveyf15$Q13, ' c("fever") = 0; c("coughing") = 1; c("runny nose") = 2; c("sneezing") = 3; c("headache") = 4; c("nausea") = 5; c("diarrhea") = 6; c("sore throat") = 7; c("coughing, headache") = 8; c("coughing, runny nose, headache") = 9; c("coughing, runny nose, headache, nausea") = 10; c("coughing, runny nose, sneezing") = 11; c("coughing, runny nose, sneezing, headache") = 12; c("coughing, sneezing") = 13; c("fever, coughing, runny nose, sneezing, headache, diarrhea, sore throat") = 14; c("fever, coughing, runny nose, sneezing, headache, sore throat") = 15; c("fever, nausea ") = 16; c("fever, runny nose") = 17; c("runny nose, headache") = 18; c("runny nose, sneezing") = 19; c("runny nose, sneezing, headache, nausea, sore throat") = 20; c("runny nose, sneezing, sore throat") = 21; c("runny nose, sore throat") = 22; c("stuffy nose") = 23')
+
+# Q14 facial skin type
+table(surveyf15$Q14)
+repSurvey15$Q14 <- recode(surveyf15$Q14, "c('Oily') = '0'; c('Dry') = '1';c('Combination') = '2' ")
+
+# Q15 vomit
+# Issue with one of the values not converting
+table(surveyf15$Q15)
+repSurvey15$Q15 <- recode(surveyf15$Q15, "c('today') = '0'; c('within the last week') = '1'; c('within the last month') = '2'; c('within the last year') = '3'; c('more than a year ago') = '4'; c('Dont know') = '5'")
+
+# Q21 snore
+table(surveyf15$Q21)
+repSurvey15$Q21 <- recode(surveyf15$Q21, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+#repSurvey15$Q21 <- recode(surveyf15$Q21, ' "Don\'t know " = 2')
+#repSurvey15$Q21 <- recode(surveyf15$Q21, ' " Don\'t know" = 2')
+
+# Q22 breathe through mouth more
+table(surveyf15$Q22)
+repSurvey15$Q22 <- recode(surveyf15$Q22, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q23 grind teeth
+table(surveyf15$Q23)
+repSurvey15$Q23 <- recode(surveyf15$Q23, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+
+# Q25 allergies
+table(surveyf15$Q25)
+repSurvey15$Q25 <- recode(surveyf15$Q25, ' c("Never") = 0; c("Rarely") = 1; c("Seasonally") = 2; c("Chronically") = 3 ')
+
+# Q26 skin condition
+table(surveyf15$Q26)
+repSurvey15$Q26 <- recode(surveyf15$Q26, ' c("No") = 0; c("Acne") = 1; c("Eczema") = 2; c("Psoriasis") = 3; c("tinea versicolor") = 4; c("Acne, Eczema") = "1.2" ')
+
+# Q27 migraine headaches
+table(surveyf15$Q27)
+repSurvey15$Q27 <- recode(surveyf15$Q27, ' c("Never") = 0; c("Rarely") = 1; c("Seasonally") = 2; c("Chronically") = 3 ')
+
+# Q28 asthma
+table(surveyf15$Q28)
+repSurvey15$Q28 <- recode(surveyf15$Q28, ' c("Never") = 0; c("Rarely") = 1; c("Seasonally") = 2; c("Chronically") = 3 ')
+
+# Q29 gum disease/oral infection
+table(surveyf15$Q29)
+repSurvey15$Q29 <- recode(surveyf15$Q29, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q30 oral surgery
+table(surveyf15$Q30)
+repSurvey15$Q30 <- recode(surveyf15$Q30, ' c("No") = 0; c("Yes") = 1 ')
+
+# Q31 chronic halitosis (bad breath)
+table(surveyf15$Q31)
+repSurvey15$Q31 <- recode(surveyf15$Q31, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q32 family history of respiratory issues
+table(surveyf15$Q32)
+repSurvey15$Q32 <- recode(surveyf15$Q32, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q33 family heart disease
+table(surveyf15$Q33)
+repSurvey15$Q33 <- recode(surveyf15$Q33, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q34 parents and bad teeth
+table(surveyf15$Q34)
+repSurvey15$Q34 <- recode(surveyf15$Q34, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+
+# Q37 pieces of gum in a day
+table(surveyf15$Q37)
+repSurvey15$Q37 <- recode(surveyf15$Q37, ' "0" = 0; c("1-2") = 1; c("3-4") = 2; c("5-6") = 3; c("7-10") = 4; c("10+") = 5 ')
+
+# Q38 yogurt eaten in a week
+table(surveyf15$Q38)
+repSurvey15$Q38 <- recode(surveyf15$Q38, ' "0" = 0; c("1") = 1; c("2") = 2; c("3") = 3; c("4") = 4; c("5") = 5; c("6") = 6; c("7") = 7')
+
+# Q39 tea in a week
+table(surveyf15$Q39)
+repSurvey15$Q39 <- recode(surveyf15$Q39, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+# Q40 coffee in a week
+table(surveyf15$Q40)
+repSurvey15$Q40 <- recode(surveyf15$Q40, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+
+# Q41 soft drinks in a week
+table(surveyf15$Q41)
+repSurvey15$Q41 <- recode(surveyf15$Q41, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+
+# Q42 fast food in a week
+table(surveyf15$Q42)
+repSurvey15$Q42 <- recode(surveyf15$Q42, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+
+# Q43 dairy products
+table(surveyf15$Q43)
+repSurvey15$Q43 <- recode(surveyf15$Q43, ' c("No") = 0; c("Yes") = 1 ')
+
+# Q44 energy drinks in a week
+table(surveyf15$Q34)
+repSurvey15$Q34 <- recode(surveyf15$Q34, ' c("0") = 0; c("1-3") = 1; c("4-7") = 2; c("7-10") = 3;c(">10") = 4 ')
+
+# Q45 eat out
+table(surveyf15$Q45)
+repSurvey15$Q45 <- recode(surveyf15$Q45, ' "0" = 0; c("1-2") = 1; c("3-4") = 2; c("5-6") = 3; c("7-8") = 4; c("9-10") = 5; c("11-12") = 6; c("13-14") = 7; c(">14") = 8 ')
+
+# Q46 drink from straw
+table(surveyf15$Q46)
+repSurvey15$Q46 <- recode(surveyf15$Q46, ' c("Never") = 0; c("Rarely") = 1; c("Sometimes") = 2; c("Often") = 3; c("Always") = 4 ')
+# Q47 food with added sugar
+table(surveyf15$Q47)
+repSurvey15$Q47 <- recode(surveyf15$Q47, ' c("Never") = 0; c("Rarely") = 1; c("Sometimes") = 2; c("Often") = 3; c("Always") = 4 ')
+
+# Q48 spicy food
+table(surveyf15$Q48)
+repSurvey15$Q48 <- recode(surveyf15$Q48, ' c("No") = 0; c("Yes") = 1; c("Sometimes", "sometimes ") = 2 ')
+
+# Q49 likelihood of sharing drinks
+# never = 1 to always = 5; converted to never = 0 to always = 4
+table(surveyf15$Q49)
+repSurvey15$Q49 <- recode(surveyf15$Q49, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4 ')
+
+# Q50 meat days
+# converted to never = 0 and always = 6
+table(surveyf15$Q50)
+repSurvey15$Q50 <- recode(surveyf15$Q50, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4; 6 = 5; 7 = 6 ')
+
+# Q51 veg/fruit days
+# converted to never = 0 and always = 6
+table(surveyf15$Q51)
+repSurvey15$Q51 <- recode(surveyf15$Q51, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4; 6 = 5; 7 = 6 ')
+
+# Q52 brush tongue
+table(surveyf15$Q52)
+repSurvey15$Q52 <- recode(surveyf15$Q52, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q53 oral piercings
+table(surveyf15$Q53)
+repSurvey15$Q53 <- recode(surveyf15$Q53, ' c("No") = 0; c("Yes") = 1 ')
+
+# Q54 brush teeth
+table(surveyf15$Q54)
+repSurvey15$Q54 <- recode(surveyf15$Q54, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+
+# Q55 tobacco
+table(surveyf15$Q55)
+repSurvey15$Q55 <- recode(surveyf15$Q55, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+
+# Q56 floss teeth
+table(surveyf15$Q56)
+repSurvey15$Q56 <- recode(surveyf15$Q56, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+
+# Q57 visit dentist
+table(surveyf15$Q57)
+repSurvey15$Q57 <- recode(surveyf15$Q57, ' c(">4") = 5' )
+
+# Q58 manual or electric toothbrush
+table(surveyf15$Q58)
+repSurvey15$Q58 <- recode(surveyf15$Q58, ' c("Manual") = 0; c("Electric") = 1; c("Both") = 2' )
+
+# Q59 mouthwash
+table(surveyf15$Q59)
+repSurvey15$Q59 <- recode(surveyf15$Q59, ' c("never") = 0; c("less than once a month") = 1; c("once a month") = 2; c("a few times a month") = 3; c("once a week") = 4; c("a few times a week") = 5; c("Daily") = 6' )
+
+# Q60 brand of mouthwash
+table(surveyf15$Q60)
+repSurvey15$Q60 <- recode(surveyf15$Q60, ' "Don\'t Know" = 0; c("Act") = 1; c("colgate", "Colgate") = 2; c("Crest", "Crest 3D White", "Crest Whitening", "crest") = 3; c("equate") = 4; c("Glister (Amway)") = 5; c("HEB brand") = 6; c("listerine", "Listerine", "listerine ", "Listerine ") = 7; c("Scope") = 8; c("Toms") = 9')
+# Q61 brand of toothpaste
+table(surveyf15$Q61)
+repSurvey15$Q61 <- recode(surveyf15$Q61, ' "Don\'t Know" = 0; c("Aim") = 1; c("Aquafresh") = 2; c("Colage", "colgate", "Colgate", "colgate ", "Colgate total") = 3; c("Crest", "Crest 3D White", "Crest Whitening", "crest", "Crest ") = 4; c("sensodyne", "Sensodyne", "sensodyne  ") = 5; c("Glister (Amway)") = 6; c("Squiggle") = 7; c("Toms") = 7')
+
+# Q62 wash hands before eating
+# converted 1 to 0 (Almost never) and 5 to 4 (Almost always)
+table(surveyf15$Q62)
+repSurvey15$Q62 <- recode(surveyf15$Q62, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4 ')
+
+# Q63 wash hands after using bathroom
+# converted 1 to 0 (Almost never) and 5 to 4 (Almost always)
+table(surveyf15$Q63)
+repSurvey15$Q63 <- recode(surveyf15$Q63, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4 ')
+
+# Q64 change old toothbrush
+# converted 1 to 0 (Almost never) and 5 to 4 (Almost always)
+table(surveyf15$Q64)
+repSurvey15$Q64 <- recode(surveyf15$Q64, ' c("Never") = 0; c("Every year") = 1; c("Every three months") = 2; c("Every month") = 3; c("More than once a month") = 4 ')
+
+# Q65 bite nails
+table(surveyf15$Q65)
+repSurvey15$Q65 <- recode(surveyf15$Q65, ' c("Never") = 0; c("Rarely") = 1; c("Sometimes") = 2; c("Often") = 3; c("Always") = 4 ')
+
+# Q66 orthodontic device (ie. braces, retainer)
+table(surveyf15$Q66)
+repSurvey15$Q66 <- recode(surveyf15$Q66, ' c("None") = 0; c("1 year") = 1; c("2 years") = 2; c("3 years") = 3; c("4 years") = 4; c("5 years") = 5; c(">5 years") = 6')
+
+# Q67 permanent or removable devices in mouth
+table(surveyf15$Q67)
+repSurvey15$Q67 <- recode(surveyf15$Q67, ' c("No") = 0; c("Yes") = 1')
+
+# Q68 stressed over last 2 weeks
+# converted 1 to 0 (Not stressed) and 5 to 4 (Very stressed)
+table(surveyf15$Q68)
+repSurvey15$Q68 <- recode(surveyf15$Q68, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4 ')
+
+# Q69 function well under stress
+table(surveyf15$Q69)
+repSurvey15$Q69 <- recode(surveyf15$Q69, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q70 organized person
+table(surveyf15$Q70)
+repSurvey15$Q70 <- recode(surveyf15$Q70, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q71 stressful life
+# converted 1 to 0 (None) and 5 to 4 (Extremely stressed)
+table(surveyf15$Q71)
+repSurvey15$Q71 <- recode(surveyf15$Q71, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4 ')
+
+# Q72 hours of sleep on an average night
+table(surveyf15$Q72)
+repSurvey15$Q72 <- recode(surveyf15$Q72, ' "0" = 0; c("1-2") = 1; c("3-4") = 2; c("5-6") = 3; c("7-8") = 4; c("9-10") = 5; c(">10") = 6 ')
+
+# Q73 hours studying or working from home
+table(surveyf15$Q73)
+repSurvey15$Q73 <- recode(surveyf15$Q73, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-30") = 5; c(">31") = 6 ')
+
+# Q74 flights in last year
+table(surveyf15$Q74)
+repSurvey15$Q74 <- recode(surveyf15$Q74, ' "0" = 0; c("1-3") = 1; c("4-7") = 2; c("7-10") = 3; c(">10") = 4 ')
+
+# Q75 out of country in last year ********************** NOT FIXED ********************
+table(surveyf15$Q75)
+repSurvey15$Q75 <- recode(surveyf15$Q75, '')
+
+# Q76 setting while growing up
+table(surveyf15$Q76)
+repSurvey15$Q76 <- recode(surveyf15$Q76, ' c("rural") = 0; c("farm") = 1; c("ranch") = 2; c("suburb") = 3; c("small town (<10,000 population)") = 4 ; c("medium town (10,000 - 100,000)") = 5 ; c("large city (>100,000 - 1,000,000)") = 6; c("metroplex (>1,000,000)") = 7')
+
+# Q78 stairs vs elevator vs escalator
+table(surveyf15$Q78)
+repSurvey15$Q78 <- recode(surveyf15$Q78, ' "Don\'t use either" = 0; c("Stairs") = 1; c("Elevator") = 2; c("Escalator") = 3; c("All equal amounts") = 4')
+
+# Q79 weight in pounds
+table(surveyf15$Q79)
+repSurvey15$Q79 <- recode(surveyf15$Q79, ' c("<100") = 0; c("100-125") = 1; c("126-150") = 2; c("151-175") = 3; c("176-200") = 4; c("201-225") = 5; c("226-250") = 6; c("251-275") = 7; c("276-300") = 8; c(">300") = 9')
+
+# Q80 hours of exercise 
+table(surveyf15$Q80)
+repSurvey15$Q80 <- recode(surveyf15$Q80, ' "0" = 0; c("1-2") = 1; c("3-4") = 2; c("5-6") = 3; c("7-8") = 4; c("9-10") = 5; c(">10") = 6 ')
+
+# Q81 daily transportation ****************** Probably would have to account for other column after survey edits
+table(surveyf15$Q81)
+repSurvey15$Q81 <- recode(surveyf15$Q81, 'c("Walk") = 0; c("Bike") = 1; c("Car") = 2; c("Bus") = 3; c("Train") = 4; c("Scooter") = 5')
+
+# Q82 distance in miles for work, school, etc
+table(surveyf15$Q82)
+repSurvey15$Q82 <- recode(surveyf15$Q82, ' c("<1") = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("20-30") = 5; c("30-50") = 6; c(">50") = 7; "Don\'t know" = 8')
+
+# Q83 pounds away from ideal weight ****** typo *******
+table(surveyf15$Q83)
+repSurvey15$Q83 <- recode(surveyf15$Q83, 'c("no change desired") = 0; c("want to lose >30 pounds") = 1; c("want to lose 15-30 pounds") = 2; c("want to lose 5-15 pounds") = 3; c("want to lose <5 pounds") = 4; c("want to gain >30 pound") = 5; c("want to gain 15-30 pounds") = 6; c("want to gain 5-15 pounds") = 7; c("want to gain <5 pounds") =8')
+# Q84 sexual orientation
+table(surveyf15$Q84)
+repSurvey15$Q84 <- recode(surveyf15$Q84,'c("Heterosexual", "hetrosexual", "heterosexual", "Heterosexual ") = 0; c("Homosexual") = 1 ; c("Bicurious") = 2')
+
+# Q85 listen to music
+table(surveyf15$Q85)
+repSurvey15$Q85 <- recode(surveyf15$Q85, ' c("Never") = 0; c("Rarely") = 1; c("Sometimes") = 2; c("Often") = 3; c("Always") = 4 ')
+
+# Q86, 87, 88 exotic pets, dogs, and cats: No need to change
+
+# Q89 people share bathroom
+table(surveyf15$Q89)
+repSurvey15$Q89 <- recode(surveyf15$Q89, 'c(">6") = 7')
+
+# Q90 children
+table(surveyf15$Q90)
+repSurvey15$Q90 <- recode(surveyf15$Q90, 'c(">4") = 5')
+
+# Q91 books read per year
+table(surveyf15$Q91)
+repSurvey15$Q91 <- recode(surveyf15$Q91, ' "0" = 0; c("1-5") = 1; c("6-10") = 2; c("11-15") = 3; c("16-20") = 4; c("21-25") = 5; c(">25") = 6 ')
+
+# Q92 swim in chlorinated pool
+table(surveyf15$Q92)
+repSurvey15$Q92 <- recode(surveyf15$Q92, ' "0" = 0; c("1-3") = 1; c("4-7") = 2; c("7-10") = 3; c(">10") = 4 ')
+
+# Q93 swim in salt water 
+table(surveyf15$Q93)
+repSurvey15$Q92 <- recode(surveyf15$Q92, ' "0" = 0; c("1-3") = 1; c("4-7") = 2; c("7-10") = 3; c(">10") = 4 ')
+
+# Q94 swim in non-chlorinated freshwater
+table(surveyf15$Q94)
+repSurvey15$Q92 <- recode(surveyf15$Q92, ' "0" = 0; c("1-3") = 1; c("4-7") = 2; c("7-10") = 3; c(">10") = 4 ')
+
+# Q95 snooze button/multiple alarms
+table(surveyf15$Q95)
+repSurvey15$Q95 <- recode(surveyf15$Q95, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q96 annual income
+table(surveyf15$Q96)
+repSurvey15$Q96 <- recode(surveyf15$Q96, ' c("Less than $23,000") = 0; c("$23,000-$32,000") = 1; c("$32,000-$60,000") = 2; c("$60,000-$100,000") = 3; c("$100,000-$150,000") = 4; c("$150,000+") = 5')
+
+# Q97 patient person
+table(surveyf15$Q97)
+repSurvey15$Q97 <- recode(surveyf15$Q97, ' c("Never") = 0; c("Rarely") = 1; c("Sometimes") = 2; c("Often") = 3; c("Always") = 4 ')
+
+# Q98 chapstick or lipstick
+table(surveyf15$Q98)
+repSurvey15$Q98 <- recode(surveyf15$Q98, ' c("Never") = 0; c("Rarely") = 1; c("Sometimes") = 2; c("Often") = 3; c("Always") = 4 ')
+
+# Q99 introvert or extrovert
+table(surveyf15$Q99)
+repSurvey15$Q99 <- recode(surveyf15$Q99, 'c("Introvert") = 0; c("Extrovert") = 1')
+
+# Q100 religious
+table(surveyf15$Q100)
+repSurvey15$Q100 <- recode(surveyf15$Q100, 'c("No") = 0; c("Yes - Christian Protestant") = 1; c("Yes - Christian Catholic") = 2; c("Yes - Jewish", "Jewish") = 3; c("Yes - Islam") = 4; c("Yes - Hinduism") = 5; c("Yes - Buddhist") = 6; c("Yes - Unaffiliated") = 7; c("Methodist") = 8; c("Christian/Hindu") = 9')
+
+# Q101 optimist or pessimist
+table(surveyf15$Q101)
+repSurvey15$Q101 <- recode(surveyf15$Q101, 'c("Optimist") = 0; c("Pessimist") = 1')
+
+# Q102 regularly garden
+table(surveyf15$Q102)
+repSurvey15$Q102 <- recode(surveyf15$Q102, 'c("No") = 0; c("Yes") = 1')
+
+# Q103 current profession
+#table(surveyf15$Q103)
+
+# Q104 sexually active
+table(surveyf15$Q104)
+repSurvey15$Q104 <- recode(surveyf15$Q104, ' "Don\'t know" = 2; c("No", "no") = 0; c("Yes", "yes") = 1 ')
+
+# Q105 engaged in oral sex
+table(surveyf15$Q105)
+repSurvey15$Q105 <- recode(surveyf15$Q105, ' "Don\'t know" = 2; c("No") = 0; c("Yes") = 1 ')
+
+# Q106 musically talented
+table(surveyf15$Q106)
+repSurvey15$Q106 <- recode(surveyf15$Q106, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4 ')
+
+# Q107 average grade
+table(surveyf15$Q107)
+repSurvey15$Q107 <- recode(surveyf15$Q107, ' c("A") = 0; c("B") = 1; c("C") = 2; c("D") = 3; c("F") = 4 ')
+
+# Q108 happiness
+table(surveyf15$Q108)
+repSurvey15$Q108 <- recode(surveyf15$Q108, ' 1 = 0; 2 = 1; 3 = 2; 4 = 3; 5 = 4 ')
+
+# Q109 visual/performing arts 3+ years
+table(surveyf15$Q109)
+repSurvey15$Q109 <- recode(surveyf15$Q109, ' c("No") = 0; c("Yes") = 1')
+
+# Q110 kiss
+table(surveyf15$Q110)
+repSurvey15$Q110 <- recode(surveyf15$Q110, ' c("No") = 0; c("Yes") = 1')
+
+# Q111 people living with
+table(surveyf15$Q111)
+repSurvey15$Q111 <- recode(surveyf15$Q111, ' c(">6") = 7 ')
+table(repSurvey15$Q111)
+
+# export csv file 
+write.xlsx(repSurvey15, "/Users/Nina/FRIome/FRIome/New-Survey.xlsx")
+
+
