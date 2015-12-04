@@ -1,0 +1,591 @@
+surveyOrder = read.csv("/Users/Nina/FRIome/FRIome/S-11-23.csv", header=TRUE)
+#f = 0
+#for (i in surveyOrder)
+#{ 
+ #       f[i] <- as.numeric(as.character(i))
+  #      print(f[i])
+#}
+
+
+# convert the factors into numeric vector
+
+#Q1
+f1 <- surveyOrder$Q1
+f1 <- as.numeric(as.character(f1))
+#Q2
+f2 <- surveyOrder$Q2
+f2 <- as.numeric(as.character(f2))
+#Q3
+f3 <- surveyOrder$Q3
+f3 <- as.numeric(as.character(f3))
+#Q4
+f4 <- surveyOrder$Q4
+f4 <- as.numeric(as.character(f4))
+#Q5
+f5 <- surveyOrder$Q5
+f5 <- as.numeric(as.character(f5))
+#Q6
+f6 <- surveyOrder$Q6
+f6 <- as.numeric(as.character(f6))
+#Q7
+f7 <- surveyOrder$Q7
+f7 <- as.numeric(as.character(f7))
+#Q9
+f9 <- surveyOrder$Q9
+f9 <- as.numeric(as.character(f9))
+#Q10
+f10 <- surveyOrder$Q10
+f10 <- as.numeric(as.character(f10))
+#Q11
+f11 <- surveyOrder$Q11
+f11 <- as.numeric(as.character(f11))
+#Q12
+f12 <- surveyOrder$Q12
+f12 <- as.numeric(as.character(f12))
+#Q13
+f13 <- surveyOrder$Q13
+f13 <- as.numeric(as.character(f13))
+#Q14
+f14 <- surveyOrder$Q14
+f14 <- as.numeric(as.character(f14))
+#Q15
+f15 <- surveyOrder$Q15
+f15 <- as.numeric(as.character(f15))
+#Q21
+f21 <- surveyOrder$Q21
+f21 <- as.numeric(as.character(f21))
+#Q22
+f22 <- surveyOrder$Q22
+f22 <- as.numeric(as.character(f22))
+#Q23
+f23 <- surveyOrder$Q23
+f23 <- as.numeric(as.character(f23))
+#Q25
+f25 <- surveyOrder$Q25
+f25 <- as.numeric(as.character(f25))
+#Q26
+f26 <- surveyOrder$Q26
+f26 <- as.numeric(as.character(f26))
+#Q27
+f27 <- surveyOrder$Q27
+f27 <- as.numeric(as.character(f27))
+#Q28
+f28 <- surveyOrder$Q28
+f28 <- as.numeric(as.character(f28))
+#Q29
+f29 <- surveyOrder$Q29
+f29 <- as.numeric(as.character(f29))
+#Q30
+f30 <- surveyOrder$Q30
+f30 <- as.numeric(as.character(f30))
+#Q31
+f31 <- surveyOrder$Q31
+f31 <- as.numeric(as.character(f31))
+#Q32
+f32 <- surveyOrder$Q32
+f32 <- as.numeric(as.character(f32))
+#Q33
+f33 <- surveyOrder$Q33
+f33 <- as.numeric(as.character(f33))
+#Q34
+f34 <- surveyOrder$Q34
+f34 <- as.numeric(as.character(f34))
+#Q37
+f37 <- surveyOrder$Q37
+f37 <- as.numeric(as.character(f37))
+#Q38
+f38 <- surveyOrder$Q38
+f38 <- as.numeric(as.character(f38))
+#Q39
+f39 <- surveyOrder$Q39
+f39 <- as.numeric(as.character(f39))
+# Q40
+f40 <- surveyOrder$Q40
+f40 <- as.numeric(as.character(f40))
+# Q41
+f41 <- surveyOrder$Q41
+f41 <- as.numeric(as.character(f41))
+# Q42
+f42 <- surveyOrder$Q42
+f42 <- as.numeric(as.character(f42))
+# Q43
+f43 <- surveyOrder$Q43
+f43 <- as.numeric(as.character(f43))
+# Q44
+f44 <- surveyOrder$Q44
+f44 <- as.numeric(as.character(f44))
+# Q45
+f45 <- surveyOrder$Q45
+f45 <- as.numeric(as.character(f45))
+# Q47
+f47 <- surveyOrder$Q47
+f47 <- as.numeric(as.character(f47))
+# Q48
+f48 <- surveyOrder$Q48
+f48 <- as.numeric(as.character(f48))
+# Q49
+f49 <- surveyOrder$Q49
+f49 <- as.numeric(as.character(f49))
+# Q50
+f50 <- surveyOrder$Q50
+f50 <- as.numeric(as.character(f50))
+# Q51
+f51 <- surveyOrder$Q51
+f51 <- as.numeric(as.character(f51))
+# Q52
+f52 <- surveyOrder$Q52
+f52 <- as.numeric(as.character(f52))
+# Q53
+f53 <- surveyOrder$Q53
+f53 <- as.numeric(as.character(f53))
+# Q54
+f54 <- surveyOrder$Q54
+f54 <- as.numeric(as.character(f54))
+# Q55
+f55 <- surveyOrder$Q55
+f55 <- as.numeric(as.character(f55))
+# Q56
+f56 <- surveyOrder$Q56
+f56 <- as.numeric(as.character(f56))
+# Q57
+f57 <- surveyOrder$Q57
+f57 <- as.numeric(as.character(f57))
+# Q58
+f58 <- surveyOrder$Q58
+f58 <- as.numeric(as.character(f58))
+# Q59
+f59 <- surveyOrder$Q59
+f59 <- as.numeric(as.character(f59))
+# Q60
+f60 <- surveyOrder$Q60
+f60 <- as.numeric(as.character(f60))
+# Q61
+f61 <- surveyOrder$Q61
+f61 <- as.numeric(as.character(f61))
+# Q62
+f62 <- surveyOrder$Q62
+f62 <- as.numeric(as.character(f62))
+# Q63
+f63 <- surveyOrder$Q63
+f63 <- as.numeric(as.character(f63))
+# Q64
+f64 <- surveyOrder$Q64
+f64 <- as.numeric(as.character(f64))
+# Q66
+f66 <- surveyOrder$Q66
+f66 <- as.numeric(as.character(f66))
+# Q67
+f67 <- surveyOrder$Q67
+f67 <- as.numeric(as.character(f67))
+# Q68
+f68 <- surveyOrder$Q68
+f68 <- as.numeric(as.character(f68))
+# Q69
+f69 <- surveyOrder$Q69
+f69 <- as.numeric(as.character(f69))
+# Q70
+f70 <- surveyOrder$Q70
+f70 <- as.numeric(as.character(f70))
+# Q71
+f71 <- surveyOrder$Q71
+f71 <- as.numeric(as.character(f71))
+# Q72
+f72 <- surveyOrder$Q72
+f72 <- as.numeric(as.character(f72))
+# Q73
+f73 <- surveyOrder$Q73
+f73 <- as.numeric(as.character(f73))
+# Q74
+f74 <- surveyOrder$Q74
+f74 <- as.numeric(as.character(f74))
+# Q76
+f76 <- surveyOrder$Q76
+f76 <- as.numeric(as.character(f76))
+# Q78
+f78 <- surveyOrder$Q78
+f78 <- as.numeric(as.character(f78))
+# Q79
+f79 <- surveyOrder$Q79
+f79 <- as.numeric(as.character(f79))
+# Q80
+f80 <- surveyOrder$Q80
+f80 <- as.numeric(as.character(f80))
+# Q81
+f81 <- surveyOrder$Q81
+f81 <- as.numeric(as.character(f81))
+# Q82
+f82 <- surveyOrder$Q82
+f82 <- as.numeric(as.character(f82))
+# Q83
+f83 <- surveyOrder$Q83
+f83 <- as.numeric(as.character(f83))
+# Q84
+f84 <- surveyOrder$Q84
+f84 <- as.numeric(as.character(f84))
+# Q86
+f86 <- surveyOrder$Q86
+f86 <- as.numeric(as.character(f86))
+# Q87
+f87 <- surveyOrder$Q87
+f87 <- as.numeric(as.character(f87))
+# Q88
+f88 <- surveyOrder$Q88
+f88 <- as.numeric(as.character(f88))
+# Q89
+f89 <- surveyOrder$Q89
+f89 <- as.numeric(as.character(f89))
+# Q90
+f90 <- surveyOrder$Q90
+f90 <- as.numeric(as.character(f90))
+# Q91
+f91 <- surveyOrder$Q91
+f91 <- as.numeric(as.character(f91))
+# Q92
+f92 <- surveyOrder$Q92
+f92 <- as.numeric(as.character(f92))
+# Q93
+f93 <- surveyOrder$Q93
+f93 <- as.numeric(as.character(f93))
+# Q94
+f94 <- surveyOrder$Q94
+f94 <- as.numeric(as.character(f94))
+# Q95
+f95 <- surveyOrder$Q95
+f95 <- as.numeric(as.character(f95))
+# Q96
+f96 <- surveyOrder$Q96
+f96 <- as.numeric(as.character(f96))
+# Q100
+f100 <- surveyOrder$Q100
+f100 <- as.numeric(as.character(f100))
+# Q101
+f101 <- surveyOrder$Q101
+f101 <- as.numeric(as.character(f101))
+# Q102
+f102 <- surveyOrder$Q102
+f102 <- as.numeric(as.character(f102))
+# Q104
+f104 <- surveyOrder$Q104
+f104 <- as.numeric(as.character(f104))
+# Q105
+f105 <- surveyOrder$Q105
+f105 <- as.numeric(as.character(f105))
+# Q106
+f106 <- surveyOrder$Q106
+f106 <- as.numeric(as.character(f106))
+# Q107
+f107 <- surveyOrder$Q107
+f107 <- as.numeric(as.character(f107))
+# Q108
+f108 <- surveyOrder$Q108
+f108 <- as.numeric(as.character(f108))
+# Q109
+f109 <- surveyOrder$Q109
+f109 <- as.numeric(as.character(f109))
+# Q110
+f110 <- surveyOrder$Q110
+f110 <- as.numeric(as.character(f110))
+# Q111
+f111 <- surveyOrder$Q111
+f111 <- as.numeric(as.character(f111))
+
+
+
+# Baccilales 
+bacc <- rowsumOrder$oBacillales
+#length(bacc)
+#length(f40)
+#Got the lengths in order to double the amount of responses to match the replicates found in the bacc file 
+#the lengths must match so we can do linear modeling 
+
+# Pasteurellales 
+past <- rowsumOrder$oPasteurellales
+# replace the following code with the type of bacteria to generate linear models 
+# that map the bacteria type to the question
+
+# linear model
+order.lm <- lm(past ~ f1)
+sum1 <- summary(order.lm)
+
+order.lm <- lm(past ~ f2)
+summary(order.lm)
+
+order.lm <- lm(past ~ f3)
+summary(order.lm)
+
+order.lm <- lm(past ~ f4)
+summary(order.lm)
+
+order.lm <- lm(past ~ f5)
+summary(order.lm)
+
+order.lm <- lm(past ~ f6)
+summary(order.lm)
+
+order.lm <- lm(past ~ f7)
+summary(order.lm)
+
+order.lm <- lm(past ~ f9)
+summary(order.lm)
+
+order.lm <- lm(past ~ f10)
+summary(order.lm)
+
+order.lm <- lm(past ~ f11)
+summary(order.lm)
+
+order.lm <- lm(past ~ f12)
+summary(order.lm)
+
+order.lm <- lm(past ~ f13)
+summary(order.lm)
+
+order.lm <- lm(past ~ f14)
+summary(order.lm)
+
+order.lm <- lm(past ~ f15)
+summary(order.lm)
+
+order.lm <- lm(past ~ f21)
+summary(order.lm)
+
+order.lm <- lm(past ~ f22)
+summary(order.lm)
+
+order.lm <- lm(past ~ f23)
+summary(order.lm)
+
+order.lm <- lm(past ~ f25)
+summary(order.lm)
+
+order.lm <- lm(past ~ f26)
+summary(order.lm)
+
+order.lm <- lm(past ~ f27)
+summary(order.lm)
+
+order.lm <- lm(past ~ f28)
+summary(order.lm)
+
+order.lm <- lm(past ~ f29)
+summary(order.lm)
+
+order.lm <- lm(past ~ f30)
+summary(order.lm)
+
+order.lm <- lm(past ~ f31)
+summary(order.lm)
+
+order.lm <- lm(past ~ f32)
+summary(order.lm)
+
+order.lm <- lm(past ~ f33)
+summary(order.lm)
+
+order.lm <- lm(past ~ f34)
+summary(order.lm)
+
+order.lm <- lm(past ~ f37)
+summary(order.lm)
+
+order.lm <- lm(past ~ f38)
+summary(order.lm)
+
+order.lm <- lm(past ~ f39)
+summary(order.lm)
+
+order.lm <- lm(past ~ f40)
+summary(order.lm)
+
+order.lm <- lm(past ~ f41)
+summary(order.lm)
+
+order.lm <- lm(past ~ f42)
+summary(order.lm)
+
+order.lm <- lm(past ~ f43)
+summary(order.lm)
+
+order.lm <- lm(past ~ f44)
+summary(order.lm)
+
+order.lm <- lm(past ~ f45)
+summary(order.lm)
+
+order.lm <- lm(past ~ f47)
+summary(order.lm)
+
+order.lm <- lm(past ~ f48)
+summary(order.lm)
+
+order.lm <- lm(past ~ f49)
+summary(order.lm)
+
+order.lm <- lm(past ~ f50)
+summary(order.lm)
+
+order.lm <- lm(past ~ f51)
+summary(order.lm)
+
+order.lm <- lm(past ~ f52)
+summary(order.lm)
+
+order.lm <- lm(past ~ f53)
+summary(order.lm)
+
+order.lm <- lm(past ~ f54)
+summary(order.lm)
+
+order.lm <- lm(past ~ f55)
+summary(order.lm)
+
+order.lm <- lm(past ~ f56)
+summary(order.lm)
+
+order.lm <- lm(past ~ f57)
+summary(order.lm)
+
+order.lm <- lm(past ~ f58)
+summary(order.lm)
+
+order.lm <- lm(past ~ f59)
+summary(order.lm)
+
+order.lm <- lm(past ~ f60)
+summary(order.lm)
+
+order.lm <- lm(past ~ f61)
+summary(order.lm)
+
+order.lm <- lm(past ~ f62)
+summary(order.lm)
+
+order.lm <- lm(past ~ f63)
+summary(order.lm)
+
+order.lm <- lm(past ~ f64)
+summary(order.lm)
+
+order.lm <- lm(past ~ f66)
+summary(order.lm)
+
+order.lm <- lm(past ~ f67)
+summary(order.lm)
+
+order.lm <- lm(past ~ f68)
+summary(order.lm)
+
+order.lm <- lm(past ~ f69)
+summary(order.lm)
+
+order.lm <- lm(past ~ f70)
+summary(order.lm)
+
+order.lm <- lm(past ~ f71)
+summary(order.lm)
+
+order.lm <- lm(past ~ f72)
+summary(order.lm)
+
+order.lm <- lm(past ~ f73)
+summary(order.lm)
+
+order.lm <- lm(past ~ f74)
+summary(order.lm)
+
+order.lm <- lm(past ~ f76)
+summary(order.lm)
+
+order.lm <- lm(past ~ f78)
+summary(order.lm)
+
+order.lm <- lm(past ~ f79)
+summary(order.lm)
+
+order.lm <- lm(past ~ f80)
+summary(order.lm)
+
+order.lm <- lm(past ~ f81)
+summary(order.lm)
+
+order.lm <- lm(past ~ f82)
+summary(order.lm)
+
+order.lm <- lm(past ~ f83)
+summary(order.lm)
+
+order.lm <- lm(past ~ f84)
+summary(order.lm)
+
+order.lm <- lm(past ~ f86)
+summary(order.lm)
+
+order.lm <- lm(past ~ f87)
+summary(order.lm)
+
+order.lm <- lm(past ~ f88)
+summary(order.lm)
+
+order.lm <- lm(past ~ f89)
+summary(order.lm)
+
+order.lm <- lm(past ~ f90)
+summary(order.lm)
+
+order.lm <- lm(past ~ f91)
+summary(order.lm)
+
+order.lm <- lm(past ~ f92)
+summary(order.lm)
+
+order.lm <- lm(past ~ f93)
+summary(order.lm)
+
+order.lm <- lm(past ~ f94)
+summary(order.lm)
+
+order.lm <- lm(past ~ f95)
+summary(order.lm)
+
+order.lm <- lm(past ~ f96)
+summary(order.lm)
+
+order.lm <- lm(past ~ f100)
+summary(order.lm)
+
+order.lm <- lm(past ~ f101)
+summary(order.lm)
+
+order.lm <- lm(past ~ f102)
+summary(order.lm)
+
+order.lm <- lm(past ~ f104)
+summary(order.lm)
+
+order.lm <- lm(past ~ f105)
+summary(order.lm)
+
+order.lm <- lm(past ~ f106)
+summary(order.lm)
+
+order.lm <- lm(past ~ f107)
+summary(order.lm)
+
+order.lm <- lm(past ~ f108)
+summary(order.lm)
+
+order.lm <- lm(past ~ f109)
+summary(order.lm)
+
+order.lm <- lm(past ~ f110)
+summary(order.lm)
+
+order.lm <- lm(past ~ f111)
+summary(order.lm)
+
+
+# trying to plot the bacc lm with Q101
+plot(lm(bacc ~ f101))
+
+plot(lm(past ~ f13))
+
