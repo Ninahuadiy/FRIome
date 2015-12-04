@@ -1,0 +1,39 @@
+phyraw = read.csv("/Users/Nina/FRIome/FRIome/Phylum-var.csv", header=TRUE, row.names=1)
+for (i in 1:ncol(phyraw)) {
+        phyraw[ , i] = as.numeric(phyraw[ , i])
+}
+rowsumPhylum = 100 * sweep(phyraw, 1, apply(phyraw, 1, sum), `/`)
+rowsumPhylum = rowsumPhylum[ ,
+                             setdiff(colnames(rowsumPhylum), "pCaldiserica")]
+pca.phy <- prcomp(rowsumPhylum, center = TRUE, scale. = TRUE)
+pcaPhyData <- as.data.frame(pca.phy$x)
+
+#biplot pca
+g.phy <- biplot(pca.phy)
+
+# rotations
+pca.phy$rotation
+# Determines the number of clusters
+wss <- (nrow(pcaPhyData)-1)*sum(apply(pcaPhyData, 2, var))
+for (i in 2:12) wss[i] <- sum(kmeans(pcaPhyData, centers = i)$withinss)
+plot(1:12, wss, type = "b")
+
+# Apply k means with k = 2 because the plot starts to bend downwards at k = 2
+kmPhy <- kmeans(pcaPhyData, 2, nstart = 25, iter.max = 1000)
+library(RColorBrewer)
+library(scales)
+palette(alpha(brewer.pal(9,'Set1'), 0.5))
+plot(pcaPhyData[ , 1], pcaPhyData[ , 2], col=kmPhy$cluster, pch=16)
+
+library(mclust)
+mclustedBIC = mclustBIC(rowsumPhylum)
+plot(mclustedBIC)
+summary(mclustedBIC, data=pcaPhyData)
+mclusted = Mclust(rowsumPhylum, G=2)
+summary(mclusted, parameters=TRUE)
+plot(pcaPhyData[ , 1], pcaPhyData[ , 2], col=mclusted$classification, pch=16)
+
+# returns boolean values for each sample when categorizing each sample to a cluster 
+clust1 <- (mclusted$classification == 1)
+clust2 <- (mclusted$classification == 2)
+
